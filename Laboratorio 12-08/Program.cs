@@ -51,7 +51,8 @@ while (menuPrincipal)
             break;
 
             case 2:
-                break;
+
+            break;
 
             case 3:
                 while (menuMostrar)
@@ -90,11 +91,12 @@ while (menuPrincipal)
             break;
 
             case 4:
-
+                clientesVip.BuscarCLiente();
             break;
 
             case 5:
                 menuPrincipal = false;
+                Console.WriteLine("");
                 Console.WriteLine("Vuelva pronto.");
                 Console.ReadKey();
             break;

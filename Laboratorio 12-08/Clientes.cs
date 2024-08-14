@@ -8,7 +8,7 @@ namespace Laboratorio_12_08
 {
     public class Clientes
     {
-        List<Clientes> listaClientes = new List<Clientes>();
+        public List<Clientes> listaClientes = new List<Clientes>();
         public string Nombre {  get; set; }
         public string Correo {  get; set; }
         public int NumeroTelefono {  get; set; }
@@ -25,9 +25,9 @@ namespace Laboratorio_12_08
             Console.Write("Ingrese el nombre del cliente: "); string nombre = Console.ReadLine();
             Console.WriteLine("");
 
-            Clientes buscarRepetidos = listaClientes.Find(a => a.Nombre == nombre);
+            Clientes buscarClientes = listaClientes.Find(b => b.Nombre == nombre);
 
-            if(buscarRepetidos == null)
+            if (buscarClientes == null)
             {
                 Console.Write("Ingrese el correo del cliente: "); string correo = Console.ReadLine();
                 Console.WriteLine("");
@@ -46,7 +46,6 @@ namespace Laboratorio_12_08
                 Console.ReadKey();
             }
         }
-
         public void MostrarClientesRegulares()
         {
             Console.Clear();
@@ -70,7 +69,7 @@ namespace Laboratorio_12_08
     }
     public class ClientesVIP : Clientes
     {
-        List<ClientesVIP> listaClientesVip = new List<ClientesVIP>();
+        public List<ClientesVIP> listaClientesVip = new List<ClientesVIP>();
         public double Descuento;
 
         public ClientesVIP(string nombre, string correo, int numeroTelefono, double descuento) : base(nombre, correo, numeroTelefono)
@@ -103,15 +102,17 @@ namespace Laboratorio_12_08
             Console.Write("Seleccione el tipo de cliente: ");
         }
 
+
         public void IngresarCLienteVip()
         {
             Console.Clear();
             Console.Write("Ingrese el nombre del cliente: "); string nombre = Console.ReadLine();
             Console.WriteLine("");
 
-            Clientes buscarRepetidos = listaClientesVip.Find(a => a.Nombre == nombre);
+            Clientes buscarRepetidosVip = listaClientesVip.Find(a => a.Nombre == nombre);
 
-            if (buscarRepetidos == null)
+
+            if (buscarRepetidosVip == null)
             {
                 Console.Write("Ingrese el correo del cliente: "); string correo = Console.ReadLine();
                 Console.WriteLine("");
@@ -123,6 +124,7 @@ namespace Laboratorio_12_08
                 Console.WriteLine("Cliente registrado correctamente.");
                 Console.ReadKey();
             }
+
             else
             {
                 Console.WriteLine("");
@@ -154,7 +156,7 @@ namespace Laboratorio_12_08
                 Console.WriteLine("");
                 Console.WriteLine("Correo del cliente: " + clientelaVip.Correo);
                 Console.WriteLine("");
-                Console.WriteLine("Número de teléfono del ciente: " + clientelaVip.NumeroTelefono);
+                Console.WriteLine("Número de teléfono del cliente: " + clientelaVip.NumeroTelefono);
                 Console.WriteLine("");
                 Console.WriteLine("Descuento VIP de cliente: 20%");
                 Console.WriteLine("=================================================================\n");
@@ -162,5 +164,71 @@ namespace Laboratorio_12_08
                 Console.ReadKey();
             }
         }
+        public void MenuBuscar()
+        {
+            Console.Clear();
+            Console.WriteLine("=====================================================");
+            Console.WriteLine("--------------MENU DE BÚSQUEDA DE DATOS--------------");
+            Console.WriteLine("1. Buscar Clientes");
+            Console.WriteLine("2. Buscar reservas");
+            Console.WriteLine("3. Salir del menú");
+            Console.WriteLine("=====================================================");
+            Console.Write("Seleccione el dato que desea buscar: ");
+        }
+
+        public void BuscarCLiente()
+        {
+            Console.Clear();
+            Console.Write("Ingrese el nombre del cliente: "); string clienteBuscar = Console.ReadLine();
+            Console.WriteLine("");
+
+            ClientesVIP buscarclientesVip = listaClientesVip.Find(a => a.Nombre == clienteBuscar);
+            Clientes buscarClientes = listaClientes.Find(b => b.Nombre == clienteBuscar);
+
+            if (buscarclientesVip != null)
+            {
+                Console.Clear();
+                Console.WriteLine("=================================================================");
+                Console.WriteLine("CLIENTE VIP");
+                Console.WriteLine("");
+                Console.WriteLine("Nombre del cliente: " + buscarclientesVip.Nombre);
+                Console.WriteLine("");
+                Console.WriteLine("Correo del cliente: " + buscarclientesVip.Correo);
+                Console.WriteLine("");
+                Console.WriteLine("Número de teléfono del cliente: " + buscarclientesVip.NumeroTelefono);
+                Console.WriteLine("");
+                Console.WriteLine("Descuento VIP de cliente: 20%");
+                Console.WriteLine("=================================================================\n");
+                Console.ReadKey();
+            }
+
+            else
+            {
+                Console.WriteLine("El cliente que busca no existe.");
+                Console.ReadKey();
+            }
+
+            if (buscarClientes != null)
+            {
+                Console.Clear();
+                Console.WriteLine("=================================================================");
+                Console.WriteLine("CLIENTE REGULAR");
+                Console.WriteLine("");
+                Console.WriteLine("Nombre del cliente: " + buscarClientes.Nombre);
+                Console.WriteLine("");
+                Console.WriteLine("Correo del cliente: " + buscarClientes.Correo);
+                Console.WriteLine("");
+                Console.WriteLine("Número de teléfono del ciente: " + buscarClientes.NumeroTelefono);
+                Console.WriteLine("=================================================================\n");
+                Console.ReadKey();
+            }
+
+            else
+            {
+                Console.WriteLine("El cliente que busca no existe.");
+                Console.ReadKey();
+            }
+        }
+
     }
 }
