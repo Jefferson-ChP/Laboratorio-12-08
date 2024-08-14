@@ -119,7 +119,7 @@ namespace Laboratorio_12_08
                 Console.Write("Ingrese el número de teléfono del cliente: "); int numeroTelefono = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("");
 
-                listaClientesVip.Add(new ClientesVIP(nombre, correo, numeroTelefono, 0.2));
+                listaClientes.Add(new ClientesVIP(nombre, correo, numeroTelefono, 0.2));
 
                 Console.WriteLine("Cliente registrado correctamente.");
                 Console.ReadKey();
@@ -183,7 +183,6 @@ namespace Laboratorio_12_08
             Console.WriteLine("");
 
             ClientesVIP buscarclientesVip = listaClientesVip.Find(a => a.Nombre == clienteBuscar);
-            Clientes buscarClientes = listaClientes.Find(b => b.Nombre == clienteBuscar);
 
             if (buscarclientesVip != null)
             {
@@ -198,27 +197,6 @@ namespace Laboratorio_12_08
                 Console.WriteLine("Número de teléfono del cliente: " + buscarclientesVip.NumeroTelefono);
                 Console.WriteLine("");
                 Console.WriteLine("Descuento VIP de cliente: 20%");
-                Console.WriteLine("=================================================================\n");
-                Console.ReadKey();
-            }
-
-            else
-            {
-                Console.WriteLine("El cliente que busca no existe.");
-                Console.ReadKey();
-            }
-
-            if (buscarClientes != null)
-            {
-                Console.Clear();
-                Console.WriteLine("=================================================================");
-                Console.WriteLine("CLIENTE REGULAR");
-                Console.WriteLine("");
-                Console.WriteLine("Nombre del cliente: " + buscarClientes.Nombre);
-                Console.WriteLine("");
-                Console.WriteLine("Correo del cliente: " + buscarClientes.Correo);
-                Console.WriteLine("");
-                Console.WriteLine("Número de teléfono del ciente: " + buscarClientes.NumeroTelefono);
                 Console.WriteLine("=================================================================\n");
                 Console.ReadKey();
             }

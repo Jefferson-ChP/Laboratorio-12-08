@@ -9,18 +9,29 @@ namespace Laboratorio_12_08
 {
     public class Reservas
     {
-        List<Reservas> listaReservas = new List<Reservas>();
         public int NumeroReserva {  get; set; }
-        public DateOnly Fecha { get; set; }
-        public DateTime Hora { get; set; }
+        public int Fecha { get; set; }
+        public int Hora { get; set; }
 
-        public Reservas(int numeroReserva, DateOnly fecha, DateTime hora)
+        public Reservas(int numeroReserva, int fecha, int hora)
         {
             NumeroReserva = numeroReserva;
             Fecha = fecha;
             Hora = hora;
         }
+    }
+    public class Platos : Reservas
+    {
+        public List<Reservas> listaReservas = new List<Reservas>();
+        public List<Reservas> listaPlatos = new List<Reservas>();
+        public string NombrePlato {  get; set; }
+        public double PrecioPlato {  get; set; }
 
+        public Platos(int numeroReserva, int fecha, int hora, string nombrePlato, double precioPlato) : base(numeroReserva, fecha, hora)
+        {
+            NombrePlato = nombrePlato;
+            PrecioPlato = precioPlato;
+        }
         public void HacerReserva()
         {
             Console.Clear();
@@ -31,12 +42,15 @@ namespace Laboratorio_12_08
 
             if (buscarRepetidos == null)
             {
-                Console.Write("Ingrese la fecha de la reserva: "); DateOnly fecha = DateOnly.Parse(Console.ReadLine());
+                Console.Write("Ingrese la fecha de la reserva: "); int fecha = int.Parse(Console.ReadLine());
                 Console.WriteLine("");
-                Console.Write("Ingrese la hora de la reserva: "); DateTime hora = DateTime.Parse(Console.ReadLine());
+                Console.Write("Ingrese la hora de la reserva: "); int hora = int.Parse(Console.ReadLine());
                 Console.WriteLine("");
-                Console.WriteLine("Se ha hecho la reserva correctamente.");
-                Console.ReadKey();
+
+                listaReservas.Add(new Platos(numeroReserva, fecha, hora, null, 0));
+
+                Console.Write("Ingrese la cantidad de platos que desea: "); int cantidadPlatos = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("");
             }
             else
             {

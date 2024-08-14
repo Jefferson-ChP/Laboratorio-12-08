@@ -2,6 +2,7 @@
 
 Clientes clientes = new Clientes(null, null, 0);
 ClientesVIP clientesVip = new ClientesVIP(null, null, 0, 0.2);
+Reservas reservaciones = new Reservas(0, 0, 0);
 bool menuPrincipal = true;
 
 while (menuPrincipal)
@@ -51,7 +52,7 @@ while (menuPrincipal)
             break;
 
             case 2:
-
+                reservaciones.HacerReserva();
             break;
 
             case 3:
