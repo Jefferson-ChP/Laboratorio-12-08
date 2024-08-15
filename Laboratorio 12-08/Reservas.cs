@@ -9,7 +9,7 @@ namespace Laboratorio_12_08
 {
     public class Reservas
     {
-        public int NumeroReserva {  get; set; }
+        public int NumeroReserva { get; set; }
         public int Fecha { get; set; }
         public int Hora { get; set; }
 
@@ -23,14 +23,16 @@ namespace Laboratorio_12_08
     public class Platos : Reservas
     {
         public List<Reservas> listaReservas = new List<Reservas>();
-        public List<Reservas> listaPlatos = new List<Reservas>();
-        public string NombrePlato {  get; set; }
-        public double PrecioPlato {  get; set; }
+        public List<Platos> listaPlatos = new List<Platos>();
+        public string NombrePlato { get; set; }
+        public double PrecioPlato { get; set; }
+        public double Total { get; set; }
 
-        public Platos(int numeroReserva, int fecha, int hora, string nombrePlato, double precioPlato) : base(numeroReserva, fecha, hora)
+        public Platos(int numeroReserva, int fecha, int hora, string nombrePlato, double precioPlato, double total) : base(numeroReserva, fecha, hora)
         {
             NombrePlato = nombrePlato;
             PrecioPlato = precioPlato;
+            Total = total;
         }
         public void HacerReserva()
         {
@@ -47,10 +49,28 @@ namespace Laboratorio_12_08
                 Console.Write("Ingrese la hora de la reserva: "); int hora = int.Parse(Console.ReadLine());
                 Console.WriteLine("");
 
-                listaReservas.Add(new Platos(numeroReserva, fecha, hora, null, 0));
+                listaReservas.Add(new Reservas(numeroReserva, fecha, hora));
 
                 Console.Write("Ingrese la cantidad de platos que desea: "); int cantidadPlatos = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("");
+                for (int i = 1; i <= cantidadPlatos; i++)
+                {
+                    Console.Clear();
+                    Console.WriteLine($"PLATO NÚMERO {i}");
+                    Console.Write("Ingrese el nombre del plato: "); string nombrePlato = Console.ReadLine();
+                    Console.WriteLine("");
+                    Console.Write("Ingrese el precio del plato: "); double precioPlato = Convert.ToDouble(Console.ReadLine());
+                    Console.WriteLine("");
+
+                    double total = Total + precioPlato;
+
+                    listaPlatos.Add(new Platos(numeroReserva, fecha, hora, nombrePlato, precioPlato, total));
+
+                    Console.WriteLine("Plato registrado.");
+                    Console.ReadKey();
+                }
+
+                Console.WriteLine("La reserva se ha realizado con éxito.");
             }
             else
             {
@@ -58,5 +78,60 @@ namespace Laboratorio_12_08
                 Console.ReadKey();
             }
         }
+
+        public void MostrarReservas()
+        {
+            foreach (Reservas reservaciones in listaReservas)
+            {
+                Console.Clear();
+                Console.WriteLine("===================================================\n");
+                Console.WriteLine("Número de la reserva: " + reservaciones.NumeroReserva);
+                Console.WriteLine("");
+                Console.WriteLine("Fecha de la reserva: " + reservaciones.Fecha);
+                Console.WriteLine("");
+                Console.WriteLine("Hora de la reserva: " + reservaciones.Hora);
+                Console.WriteLine("");
+                Console.WriteLine("===================================================");
+                Console.WriteLine("----------------LISTA DE PLATOS----------------");
+                foreach (Platos platillos in listaPlatos)
+                {
+                    Console.WriteLine(platillos.NombrePlato + "........... " + platillos.PrecioPlato);
+                    Console.WriteLine("");
+                }
+                Console.WriteLine("Total reserva: ");
+                Console.WriteLine("===================================================\n");
+                Console.WriteLine("Presione cualquier tecla para pasar a la siguiente reserva.");
+                Console.ReadKey();
+            }
+        }
+
+        public void BuscarReservas()
+        {
+            Console.Clear();
+            Console.Write("Ingrese el número de la reserva: "); int numeroReservaBuscar = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("");
+
+            Platos buscarReservas = listaPlatos.Find(a => a.NumeroReserva == numeroReservaBuscar);
+
+            if (buscarReservas == null )
+            {
+                    Console.WriteLine("Número de la reserva: " + buscarReservas.NumeroReserva);
+                    Console.WriteLine("");
+                    Console.WriteLine("Fecha de la reserva: " + buscarReservas.Fecha);
+                    Console.WriteLine("");
+                    Console.WriteLine("Hora de la reserva: " + buscarReservas.Hora);
+                    Console.WriteLine("");
+                    Console.WriteLine("===================================================");
+                    Console.WriteLine("----------------LISTA DE PLATOS----------------");
+                    foreach (Platos platillos in listaPlatos)
+                    {
+                        Console.WriteLine(buscarReservas.NombrePlato + "........... " + buscarReservas.PrecioPlato);
+                        Console.WriteLine("");
+                    }
+                    Console.WriteLine("===================================================\n");
+                    Console.WriteLine("Presione cualquier tecla para pasar a la siguiente reserva.");
+                    Console.ReadKey();
+            }
+        }
     }
-}
+} 

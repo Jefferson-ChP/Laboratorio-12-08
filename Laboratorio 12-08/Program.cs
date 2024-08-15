@@ -2,7 +2,7 @@
 
 Clientes clientes = new Clientes(null, null, 0);
 ClientesVIP clientesVip = new ClientesVIP(null, null, 0, 0.2);
-Reservas reservaciones = new Reservas(0, 0, 0);
+Platos reservaciones = new Platos(0, 0, 0, null, 0, 0);
 bool menuPrincipal = true;
 
 while (menuPrincipal)
@@ -24,7 +24,7 @@ while (menuPrincipal)
                         switch (opcionClientes)
                         {
                             case 1:
-                                clientes.IngresarClienteRegular();
+                                clientesVip.IngresarClienteRegular();
                             break;
 
                             case 2:
@@ -64,12 +64,13 @@ while (menuPrincipal)
                         switch (opcionMenuMostrar)
                         {
                             case 1:
-                                clientes.MostrarClientesRegulares();
+                                clientesVip.MostrarClientesRegulares();
                                 clientesVip.MostrarClientesVip();
                             break;
 
                             case 2:
-                                break;
+                                reservaciones.MostrarReservas();
+                            break;
 
                             case 3:
                                 menuMostrar = false;
